@@ -4,6 +4,7 @@ import com.example.numbersapi.entity.User;
 import com.example.numbersapi.jwt.GeneratorJWTUser;
 import com.example.numbersapi.jwt.JWTUser;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +16,7 @@ public class JWTUserDetailsService implements UserDetailsService {
 
     private final UserService userService;
 
+    @Autowired
     public JWTUserDetailsService(UserService userService) {
         this.userService = userService;
     }

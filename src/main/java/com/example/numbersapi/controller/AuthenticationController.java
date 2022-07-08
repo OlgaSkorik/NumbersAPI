@@ -28,12 +28,6 @@ public class AuthenticationController {
     private final JWTTokenProvider jwtTokenProvider;
     private final UserServiceClass userService;
 
-//    public AuthenticationController(AuthenticationManager authenticationManager, JWTTokenProvider jwtTokenProvider, UserService userService) {
-//        this.authenticationManager = authenticationManager;
-//        this.jwtTokenProvider = jwtTokenProvider;
-//        this.userService = userService;
-//    }
-
     @PostMapping("/login")
     public ResponseEntity login (@RequestBody AuthRequestDTO authRequestDTO) {
         try {
