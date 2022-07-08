@@ -1,0 +1,114 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1.0.0" author="olga.skorik">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(300)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(30)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="date" defaultValue="now">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="date" defaultValue="tomorrow">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="olga.skorik">
+        <createTable tableName="trivia_numbers">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="triviaNumber" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="fact" type="varchar(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="olga.skorik">
+        <createTable tableName="roles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="typeOfRole" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="status" type="VARCHAR(30)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.3" author="olga.skorik">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="BIGINT"></column>
+            <column name="role_id" type="BIGINT"></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.4" author="olga.skorik">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_roles_user"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="1.0.5" author="olga.skorik">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_roles_roles"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="roles"/>
+    </changeSet>
+
+    <changeSet id="1.0.6" author="olga.skorik">
+        <insert tableName="roles">
+            <column name="typeOfRole" value="ROLE_USER"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="typeOfRole" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="users">
+            <column name="name" value="OlgaSk"/>
+            <column name="username" value="olga"/>
+            <column name="password" value="$2a$04$Q.vtSU16ukq39NSVLQxtHuP9.lnpcxr5ogipO7QpFcTDdKPkyLYhK"/>
+        </insert>
+        <insert tableName="users">
+            <column name="name" value="ADMIN"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="101010"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="user_id" value="2"/>
+            <column name="role_id" value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
