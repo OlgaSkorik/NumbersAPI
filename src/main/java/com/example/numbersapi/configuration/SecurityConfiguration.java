@@ -5,6 +5,7 @@ import com.example.numbersapi.jwt.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String ADMIN_ENDPOINT = "/api/admin/**";
     private static final String LOGIN_ENDPOINT = "/api/auth/login";
+    private static final String REG_ENDPOINT = "/api/auth/registration";
+    private static final String NUM_ENDPOINT = "/api/number/**";
+    private static final String[] PUBLIC_URLS = {
+            "/v2/api-docs",
+            "/swagger-ui/index.html",
+            "/swagger-resources/**",
+            "configuration/**",
+            "webjars/**",
+            "/*.html",
+            "/**/*.html",
+            "/**/*.css",
+            "/**/*.js"
+    };
 
     @Autowired
     public SecurityConfiguration(JWTTokenProvider jwtTokenProvider) {
@@ -36,9 +50,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers(NUM_ENDPOINT).permitAll()
                 .antMatchers(LOGIN_ENDPOINT).permitAll()
+                .antMatchers(REG_ENDPOINT).permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-//                .antMatchers(HttpMethod.GET, PUBLIC_URLS).permitAll()
+                .antMatchers(HttpMethod.GET, PUBLIC_URLS).permitAll()
                 .antMatchers("/db/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

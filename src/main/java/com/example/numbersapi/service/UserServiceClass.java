@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,12 +73,20 @@ public class UserServiceClass implements UserService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
+    public void deleteUserById(Long id) {
+        userRepository.deleteUserById(id);
         log.info("User successfully deleted by id {}!", id);
     }
 
+    @Override
+    @Transactional
+    public void deleteUserByUsername(String username) {
+        userRepository.deleteUserByUsername(username);
+    }
 
+    public boolean existByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
 
 
 }

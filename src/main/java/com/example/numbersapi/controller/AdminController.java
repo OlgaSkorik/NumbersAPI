@@ -23,7 +23,7 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/userById/{id}")
+    @GetMapping("/userById/{id}")
     public ResponseEntity<AdminUserDTO> findUserById(@PathVariable(name = "id") Long id) {
         User user = userService.findById(id);
         if (user == null) {
@@ -33,13 +33,13 @@ public class AdminController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-//    @GetMapping(value = "usersByUsername/{username}")
-//    public ResponseEntity<UserDto> getUserByUsername(@PathVariable(name = "username") String username) {
-//        User user = userService.findByUsername(username);
-//        if (user == null) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        UserDto result = UserDto.fromUser(user);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
+    @GetMapping("findByUsername/{username}")
+    public ResponseEntity<AdminUserDTO> findUserByUsername(@PathVariable(name = "username") String username) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        AdminUserDTO result = AdminUserDTO.fromUser(user);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

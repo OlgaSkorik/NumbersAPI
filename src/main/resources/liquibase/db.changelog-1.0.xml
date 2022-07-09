@@ -34,7 +34,7 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="triviaNumber" type="BIGINT">
+            <column name="trivianumber" type="BIGINT">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="fact" type="varchar(500)">
@@ -107,6 +107,26 @@
             <column name="username" value="admin"/>
             <column name="password" value="$2a$04$Q.vtSU16ukq39NSVLQxtHuP9.lnpcxr5ogipO7QpFcTDdKPkyLYhK"/>
         </insert>
+        <insert tableName="trivia_numbers">
+            <column name="trivianumber" value="1"/>
+            <column name="fact" value="1 is the loneliest number."/>
+        </insert>
+        <insert tableName="trivia_numbers">
+            <column name="trivianumber" value="2"/>
+            <column name="fact" value="2 is the number of polynucleotide strands in a DNA double helix."/>
+        </insert>
+        <insert tableName="trivia_numbers">
+            <column name="trivianumber" value="3"/>
+            <column name="fact" value="3 is the number of points received for a successful field goal in both American football and Canadian football."/>
+        </insert>
+        <insert tableName="trivia_numbers">
+            <column name="trivianumber" value="4"/>
+            <column name="fact" value="4 is the number of bits in a nibble, equivalent to half a byte."/>
+        </insert>
+        <insert tableName="trivia_numbers">
+            <column name="trivianumber" value="5"/>
+            <column name="fact" value="5 is the number of interlocked rings in the symbol of the Olympic Games, representing the number of inhabited continents represented by the Olympians (counting North America and South America as one continent)."/>
+        </insert>
         <insert tableName="user_roles">
             <column name="user_id" value="1"/>
             <column name="role_id" value="1"/>
@@ -114,6 +134,76 @@
         <insert tableName="user_roles">
             <column name="user_id" value="2"/>
             <column name="role_id" value="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.7" author="olga.skorik">
+        <createTable tableName="math_numbers">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="mathnumber" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="fact" type="varchar(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <insert tableName="math_numbers">
+            <column name="mathnumber" value="1"/>
+            <column name="fact" value="1 is the first figurate number of every kind, such as triangular number, pentagonal number and centered hexagonal number, to name just a few."/>
+        </insert>
+        <insert tableName="math_numbers">
+            <column name="mathnumber" value="2"/>
+            <column name="fact" value="2 is a primorial, as well as its own factorial."/>
+        </insert>
+        <insert tableName="math_numbers">
+            <column name="mathnumber" value="3"/>
+            <column name="fact" value="3 is the fifth Fibonacci number and the third that is unique."/>
+        </insert>
+        <insert tableName="math_numbers">
+            <column name="mathnumber" value="4"/>
+            <column name="fact" value="4 is the maximum number of dimensions of a real division algebra (the quaternions), by a theorem of Ferdinand Georg Frobenius."/>
+        </insert>
+        <insert tableName="math_numbers">
+            <column name="mathnumber" value="5"/>
+            <column name="fact" value="5 is the third prime number."/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.8" author="olga.skorik">
+        <createTable tableName="year_numbers">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="yearnumber" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="fact" type="varchar(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <insert tableName="year_numbers">
+            <column name="yearnumber" value="1"/>
+            <column name="fact" value="1 is the year that Areius Paianeius becomes Archon of Athens."/>
+        </insert>
+        <insert tableName="year_numbers">
+            <column name="yearnumber" value="2"/>
+            <column name="fact" value="2 is the year that the Chinese census shows nearly one million people living in Vietnam."/>
+        </insert>
+        <insert tableName="year_numbers">
+            <column name="yearnumber" value="3"/>
+            <column name="fact" value="3 is the year that Lucius Aelius Lamia and Marcus Valerius Messalla Messallinus are consuls of Rome."/>
+        </insert>
+        <insert tableName="year_numbers">
+            <column name="yearnumber" value="4"/>
+            <column name="fact" value="4 is the year that Emperor Caesar Augustus summons Tiberius to Rome, and names him his heir and future emperor."/>
+        </insert>
+        <insert tableName="year_numbers">
+            <column name="yearnumber" value="5"/>
+            <column name="fact" value="5 is the year that Tiberius conquers Germania Inferior."/>
         </insert>
     </changeSet>
 

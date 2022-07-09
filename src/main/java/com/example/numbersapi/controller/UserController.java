@@ -6,10 +6,10 @@ import com.example.numbersapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/au/user")
@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/findById/{id}")
     public ResponseEntity<UserDTO> findUserById(@PathVariable(name = "id") Long id) {
         User user = userService.findById(id);
         if (user == null) {
@@ -30,5 +30,38 @@ public class UserController {
         }
         UserDTO result = UserDTO.fromUser(user);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/findAll")
+    public List<User> findAll() {
+        return userService.findAll();
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<User> save (@RequestBody User user) {
+        return new ResponseEntity<>(userService.registration(user), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{username}")
+    public ResponseEntity<User> updateUser (@PathVariable String username, @RequestBody User myNewUser) {
+        User myUser = userService.findByUsername(username);
+        if (myUser != null) {
+            myNewUser.setId(myUser.getId());
+            User updateUser = userService.registration(myNewUser);
+            return ResponseEntity.ok(updateUser);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/deleteByUsername/{username}")
+    public ResponseEntity<User> deleteUserByUsername(@PathVariable String username) {
+        userService.deleteUserByUsername(username);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteById/{id}")
+    public ResponseEntity<User> deleteUserById(@PathVariable Long id) {
+        userService.deleteUserById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

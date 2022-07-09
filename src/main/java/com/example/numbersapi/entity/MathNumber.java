@@ -13,13 +13,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "trivia_numbers")
-public class TriviaNumber {
+@Table(name = "math_numbers")
+public class MathNumber {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "trivianumber")
-    private long triviaNumber;
+    @Column(name = "mathnumber")
+    private long mathNumber;
     private String fact;
 }
