@@ -32,8 +32,7 @@ public class JWTTokenProvider {
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
     @PostConstruct
@@ -76,9 +75,12 @@ public class JWTTokenProvider {
 
     public  boolean validateToken(String token) {
         try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
 
-            return !claims.getBody().getExpiration().before(new Date());
+            if (claimsJws.getBody().getExpiration().before(new Date())) {
+                return false;
+            }
+            return true;
         } catch (JwtException | IllegalArgumentException e) {
             throw new JWTAuthenticationException("JWT token is expired or invalid");
         }

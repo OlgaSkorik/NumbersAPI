@@ -41,7 +41,7 @@ public class UserServiceClass implements UserService {
         user.setCreated(now);
         user.setUpdated(now);
         User newUser = userRepository.save(user);
-        log.info("User {} successfully registered!", newUser);
+        log.info("User {} successfully registered!", user.getName());
         return newUser;
     }
 
@@ -55,7 +55,7 @@ public class UserServiceClass implements UserService {
     @Override
     public User findByUsername(String username) {
         User userFound = userRepository.findByUsername(username);
-        log.info("User {} successfully found by username!", userFound);
+        log.info("User successfully found by username {}!", username);
         return userFound;
     }
 
@@ -63,7 +63,7 @@ public class UserServiceClass implements UserService {
     public User findById(Long id) {
         if (userRepository.findById(id).isPresent()) {
             User userFound = userRepository.findById(id).get();
-            log.info("User {} successfully found by id!", userFound);
+            log.info("User successfully found by id {}!", id);
             return userFound;
         } else {
             log.warn("User is not found by id {}!", id);

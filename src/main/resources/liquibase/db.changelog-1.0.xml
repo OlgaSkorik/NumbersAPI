@@ -48,7 +48,7 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="typeOfRole" type="VARCHAR(50)">
+            <column name="typeofrole" type="VARCHAR(50)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="created" type="date" defaultValue="now">
@@ -92,10 +92,10 @@
 
     <changeSet id="1.0.6" author="olga.skorik">
         <insert tableName="roles">
-            <column name="typeOfRole" value="ROLE_USER"/>
+            <column name="typeofrole" value="ROLE_USER"/>
         </insert>
         <insert tableName="roles">
-            <column name="typeOfRole" value="ROLE_ADMIN"/>
+            <column name="typeofrole" value="ROLE_ADMIN"/>
         </insert>
         <insert tableName="users">
             <column name="name" value="OlgaSk"/>
@@ -105,7 +105,7 @@
         <insert tableName="users">
             <column name="name" value="ADMIN"/>
             <column name="username" value="admin"/>
-            <column name="password" value="101010"/>
+            <column name="password" value="$2a$04$Q.vtSU16ukq39NSVLQxtHuP9.lnpcxr5ogipO7QpFcTDdKPkyLYhK"/>
         </insert>
         <insert tableName="user_roles">
             <column name="user_id" value="1"/>
